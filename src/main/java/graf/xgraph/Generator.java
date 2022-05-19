@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Generator {
-    private final int rowNumber = 10;
-    private final int columnNumber = 10;
+    private final int rowNumber = 200;
+    private final int columnNumber = 200;
     private ArrayList<Line> przejscia = new ArrayList<Line>();
     Random random = new Random();
 

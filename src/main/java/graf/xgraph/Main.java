@@ -21,11 +21,21 @@ public class Main extends Application {
         launch();
         Generator generator = new Generator();
         generator.generate();
-        generator.write();
+        //generator.write();
         try {
             generator.toFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        File file = new File("GraphinFile");
+        try {
+            Reader reader = new Reader("GraphinFile");
+            reader.scanFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }
