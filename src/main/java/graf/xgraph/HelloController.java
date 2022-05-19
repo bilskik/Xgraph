@@ -1,15 +1,20 @@
 package graf.xgraph;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class HelloController {
+public class HelloController  {
     @FXML
     private TextField row_field;
     @FXML
@@ -36,11 +41,12 @@ public class HelloController {
     private Button save_but;
     @FXML
     private TextField save_text;
+    @FXML
+    private Label ErrorLabel;
     public int row,col;
     public double to,from;
-    private int checker = 0;
 
-    public void confirm(ActionEvent event) {
+    public void confirm(ActionEvent event) throws IOException {
         try {
             row = Integer.parseInt(row_field.getText());
             col = Integer.parseInt(col_field.getText());
@@ -48,7 +54,18 @@ public class HelloController {
             from = Double.parseDouble(to_field.getText());
         }
         catch(NumberFormatException e) {
-            System.out.println("only numbers are allowed");
+            try {
+                System.out.println("wykrywam");
+                Parent root = FXMLLoader.load(getClass().getResource("Errors_window.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+                ErrorLabel.setText("Only numbers are allowed!");
+            }
+            catch(Exception a) {
+                System.out.println("error");
+            }
         }
     }
     public void graph(ActionEvent event) {
@@ -60,7 +77,7 @@ public class HelloController {
             graph_cons.setText("Consistent");
     }
     public void Generate_Graph(ActionEvent event) {
-        Generator generator = new Generator(row,col);
+        Generator generator = new Generator(row,col,to,from);
         generator.generate();
         generator.write();
         try {

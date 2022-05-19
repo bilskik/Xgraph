@@ -6,9 +6,13 @@ import java.util.Random;
 public class Generator {
     private final int rowNumber;
     private final int columnNumber;
-    Generator(int row, int col) {
+    private final double from;
+    private final double to;
+    Generator(int row, int col, double to, double from) {
         this.rowNumber = row;
         this.columnNumber = col;
+        this.to = to;
+        this.from = from;
     }
     private ArrayList<Line> przejscia = new ArrayList<Line>();
     Random random = new Random();
@@ -16,19 +20,22 @@ public class Generator {
     public void generate() {
         for (int i = 0; i < columnNumber * rowNumber - 1; i++) {
             if (((i + 1) % columnNumber != 0) && (i < columnNumber * (rowNumber - 1))) {
-                przejscia.add(new Line(i, i + 1, random.nextDouble()));
-                przejscia.add(new Line(i, i + columnNumber, random.nextDouble()));
+                przejscia.add(new Line(i, i + 1, rand_generator()));
+                przejscia.add(new Line(i, i + columnNumber, rand_generator()));
                 //generuj 2 prawo i dĂłl
             }
             if ((i + 1) % columnNumber == 0) {
-                przejscia.add(new Line(i, i + columnNumber, random.nextDouble()));
+                przejscia.add(new Line(i, i + columnNumber, rand_generator()));
                 //generuj w dĂłl
             }
             if (i >= columnNumber * (rowNumber - 1)) {
-                przejscia.add(new Line(i, i + 1, random.nextDouble()));
+                przejscia.add(new Line(i, i + 1, rand_generator()));
                 //generuj w prawo
             }
         }
+    }
+    private double rand_generator() {
+        return from + (to - from)*random.nextDouble();
     }
 
     public void write() {
