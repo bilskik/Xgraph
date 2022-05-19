@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Generator {
-    private final int rowNumber = 200;
-    private final int columnNumber = 200;
+    private final int rowNumber;
+    private final int columnNumber;
+    Generator(int row, int col) {
+        this.rowNumber = row;
+        this.columnNumber = col;
+    }
     private ArrayList<Line> przejscia = new ArrayList<Line>();
     Random random = new Random();
 
@@ -33,7 +37,7 @@ public class Generator {
         }
     }
     public void toFile() throws IOException {
-        File file = new File("GraphinFile");
+        File file = new File("Siema");
         file.toFile(rowNumber,columnNumber);
         int currentindex = 0;
         boolean newLine;
