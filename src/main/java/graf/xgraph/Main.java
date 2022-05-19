@@ -12,23 +12,19 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GUi.fxml")));
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GUi.fxml"));
-        Scene scene = new Scene(root);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("GUi.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
         launch();
-        Generator generator = new Generator();
-        generator.generate();
-        generator.write();
-        try {
-            generator.toFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
+
 }
