@@ -1,11 +1,12 @@
 package graf.xgraph;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Generator {
-    private static final int rowNumber = 10;
-    private static final int columnNumber = 10;
-    private static final ArrayList<Line> przejscia = new ArrayList<Line>();
+    private final int rowNumber = 10;
+    private final int columnNumber = 10;
+    private final ArrayList<Line> przejscia = new ArrayList<Line>();
     Random random = new Random();
 
     public void generate() {
@@ -29,6 +30,21 @@ public class Generator {
     public void write() {
         for (Line object : przejscia) {
             System.out.println(object.getIndex1() + " <---> " + object.getIndex2() + " value: " + object.getValue());
+        }
+    }
+    public void toFile() throws IOException {
+        File.toFile(rowNumber,columnNumber);
+        int currentindex = 0;
+        boolean newLine;
+        for (Line line: przejscia) {
+            if (currentindex == line.getIndex1()){
+                newLine = false;
+            }
+            else {
+                currentindex = line.getIndex1();
+                newLine = true;
+            }
+            File.toFile(line.getIndex2(),line.getValue(), newLine);
         }
     }
 
