@@ -25,5 +25,10 @@ public class Main extends Application {
         Generator generator = new Generator();
         generator.generate();
         generator.write();
+        try {
+            generator.toFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
