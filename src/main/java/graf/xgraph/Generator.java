@@ -6,7 +6,7 @@ import java.util.Random;
 public class Generator {
     private final int rowNumber = 10;
     private final int columnNumber = 10;
-    private final ArrayList<Line> przejscia = new ArrayList<Line>();
+    private ArrayList<Line> przejscia = new ArrayList<Line>();
     Random random = new Random();
 
     public void generate() {
@@ -33,7 +33,8 @@ public class Generator {
         }
     }
     public void toFile() throws IOException {
-        File.toFile(rowNumber,columnNumber);
+        File file = new File("GraphinFile");
+        file.toFile(rowNumber,columnNumber);
         int currentindex = 0;
         boolean newLine;
         for (Line line: przejscia) {
@@ -44,7 +45,7 @@ public class Generator {
                 currentindex = line.getIndex1();
                 newLine = true;
             }
-            File.toFile(line.getIndex2(),line.getValue(), newLine);
+            file.toFile(line.getIndex2(),line.getValue(), newLine);
         }
     }
 
