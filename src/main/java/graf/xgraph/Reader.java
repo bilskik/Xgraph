@@ -11,7 +11,7 @@ public class Reader {
     Scanner sc;
     private int readedRow;
     private int readedColumn;
-    private ArrayList<Line> readedLines = new ArrayList<Line>();
+    private ArrayList<Graph> readedLines = new ArrayList<Graph>();
 
     public int getReadedColumn() {
         return readedColumn;
@@ -21,7 +21,7 @@ public class Reader {
         return readedRow;
     }
 
-    public ArrayList<Line> getReadedLines() {
+    public ArrayList<Graph> getReadedLines() {
         return readedLines;
     }
 
@@ -77,7 +77,7 @@ public class Reader {
         if (matcher2.matches()) {
             first = Integer.parseInt(matcher2.group(1));
             second = Double.parseDouble(matcher2.group(2));
-            readedLines.add(new Line(line, first,second));
+            readedLines.add(new Graph(line, first,second));
         }
         int third = 0;
         double fourth = 0.0;
@@ -86,8 +86,8 @@ public class Reader {
             second = Double.parseDouble(matcher3.group(2));
             third = Integer.parseInt(matcher3.group(3));
             fourth = Double.parseDouble(matcher3.group(4));
-            readedLines.add(new Line(line, first,second));
-            readedLines.add(new Line(line, third,fourth));
+            readedLines.add(new Graph(line, first,second));
+            readedLines.add(new Graph(line, third,fourth));
         }
         System.out.println(first + " " + second + " " + third + " " + fourth);
     }
