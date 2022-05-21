@@ -14,22 +14,22 @@ public class Generator {
         this.to = to;
         this.from = from;
     }
-    private ArrayList<Line> przejscia = new ArrayList<Line>();
+    private ArrayList<Graph> przejscia = new ArrayList<Graph>();
     Random random = new Random();
 
     public void generate() {
         for (int i = 0; i < columnNumber * rowNumber - 1; i++) {
             if (((i + 1) % columnNumber != 0) && (i < columnNumber * (rowNumber - 1))) {
-                przejscia.add(new Line(i, i + 1, rand_generator()));
-                przejscia.add(new Line(i, i + columnNumber, rand_generator()));
+                przejscia.add(new Graph(i, i + 1, rand_generator()));
+                przejscia.add(new Graph(i, i + columnNumber, rand_generator()));
                 //generuj 2 prawo i dĂłl
             }
             if ((i + 1) % columnNumber == 0) {
-                przejscia.add(new Line(i, i + columnNumber, rand_generator()));
+                przejscia.add(new Graph(i, i + columnNumber, rand_generator()));
                 //generuj w dĂłl
             }
             if (i >= columnNumber * (rowNumber - 1)) {
-                przejscia.add(new Line(i, i + 1, rand_generator()));
+                przejscia.add(new Graph(i, i + 1, rand_generator()));
                 //generuj w prawo
             }
         }
@@ -39,16 +39,16 @@ public class Generator {
     }
 
     public void write() {
-        for (Line object : przejscia) {
+        for (Graph object : przejscia) {
             System.out.println(object.getIndex1() + " <---> " + object.getIndex2() + " value: " + object.getValue());
         }
     }
-    public void toFile() throws IOException {
-        File file = new File("Siema");
+    public void toFile(String path) throws IOException {
+        File file = new File(path);
         file.toFile(rowNumber,columnNumber);
         int currentindex = 0;
         boolean newLine;
-        for (Line line: przejscia) {
+        for (Graph line: przejscia) {
             if (currentindex == line.getIndex1()){
                 newLine = false;
             }
