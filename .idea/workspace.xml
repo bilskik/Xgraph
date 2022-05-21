@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="07c49be5-5bb5-45fa-be32-0c7bd07a38bb" name="Changes" comment="">
+    <list default="true" id="07c49be5-5bb5-45fa-be32-0c7bd07a38bb" name="Changes" comment="Alert error">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Siema" beforeDir="false" afterPath="$PROJECT_DIR$/Siema" afterDir="false" />
@@ -121,6 +121,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Alert error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alert error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
