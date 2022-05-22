@@ -59,5 +59,13 @@ public class Generator {
             file.toFile(line.getIndex2(),line.getValue(), newLine);
         }
     }
-
+    public ArrayList<Graph> getPrzejscia() {
+        return(przejscia);
+    }
+    public int getRowNumber() {
+        return rowNumber;
+    }
+    public int getColumnNumber() {
+        return columnNumber;
+    }
 }
