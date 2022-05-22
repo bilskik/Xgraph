@@ -46,6 +46,8 @@ public class HelloController {
     private TextField save_text;
     @FXML
     private AnchorPane stage;
+    Button buttons[];
+    Line lines[];
 
     public int row,col;
     public double to,from;
@@ -95,7 +97,11 @@ public class HelloController {
 
     }
     public void Clear_Screen(ActionEvent event) {
-        ;
+        for(int i=0; i<col*(row-1) + row*(col-1); i++) {
+            if(row*col > i)
+                stage.getChildren().remove(buttons[i]);
+            stage.getChildren().remove(lines[i]);
+        }
     }
     public void Clear_Path(ActionEvent event) {
         ;
@@ -125,8 +131,8 @@ public class HelloController {
     public void display_Graph() {
         int X_position = 20;
         int Y_position = 235;
-        int tmp_row = 0;
-        Button[] buttons = new Button[row*col];
+        int tmp_col = 0;
+        buttons = new Button[row*col];
         for(int i=0; i<row*col; i++)
             buttons[i] =  new Button();
         for(int i=0; i<row*col; i++) {
@@ -134,54 +140,68 @@ public class HelloController {
             buttons[i].setLayoutY(Y_position);
             stage.getChildren().add(buttons[i]);
             X_position+=40;
-            tmp_row++;
-            if(tmp_row == row) {
+            tmp_col++;
+            if(tmp_col == col) {
                 Y_position+=40;
                 X_position=20;
-                tmp_row = 0;
+                tmp_col = 0;
             }
         }
         display_line_between_graph();
     }
     public void display_line_between_graph() {
-        int X_position_start = 38;
-        int X_position_finish = 60;
-        int Y_position_start = 247;
-        int Y_position_finish = 247;
-        int tmp_row = 0;
-        int row_checker = 0;
-        Line[] lines = new Line[row*col];
-        /* Testing lines:
-        Line line = new Line();
-        line.setStartX(20);
-        line.setStartY(30);
-        line.setEndX(500);
-        line.setEndY(31);
-        stage.getChildren().add(line);
-        */
-        for(int i=0; i<row*col; i++) {
-            lines[i] = new Line();
-            lines[i].setStartX(X_position_start);
-            lines[i].setStartY(Y_position_start);
-            lines[i].setEndX(X_position_finish);
-            lines[i].setEndY(Y_position_finish);
-            stage.getChildren().add(lines[i]);
-            X_position_start+=40;
-            X_position_finish+=40;
-            tmp_row++;
-            if(tmp_row + 1 == row) {
-                Y_position_start+=40;
-                Y_position_finish+=40;
-                X_position_start = 38;
-                X_position_finish = 60;
-                tmp_row=0;
-                row_checker++;
+        int X_position_start_across = 38;
+        int X_position_finish_across = 60;
+        int Y_position_start_across = 247;
+        int Y_position_finish_across = 247;
+        int X_position_start_vertical = 30;
+        int X_position_finish_vertical = 30;
+        int Y_position_start_vertical = 259;
+        int Y_position_finish_vertical = 276;
+        int tmp_col = 0;
+        int mode = 0;
+        int line_number = col*(row-1) + row*(col-1);
+        lines = new Line[line_number];
+        for(int i=0; i<line_number; i++) {
+            if(mode == 0) {
+                lines[i] = new Line();
+                lines[i].setStartX(X_position_start_across);
+                lines[i].setStartY(Y_position_start_across);
+                lines[i].setEndX(X_position_finish_across);
+                lines[i].setEndY(Y_position_finish_across);
+                stage.getChildren().add(lines[i]);
+                X_position_start_across += 40;
+                X_position_finish_across += 40;
+                tmp_col++;
+                if (tmp_col + 1 == col) {
+                    Y_position_start_across += 40;
+                    Y_position_finish_across += 40;
+                    X_position_start_across = 38;
+                    X_position_finish_across = 60;
+                    tmp_col = 0;
+                    mode = 1;
+                }
             }
-            if(row_checker == col)
-                break;
+            else if(mode == 1){
+                lines[i] = new Line();
+                lines[i].setStartX(X_position_start_vertical);
+                lines[i].setStartY(Y_position_start_vertical);
+                lines[i].setEndX(X_position_finish_vertical);
+                lines[i].setEndY(Y_position_finish_vertical);
+                stage.getChildren().add(lines[i]);
+                X_position_start_vertical += 40;
+                X_position_finish_vertical += 40;
+                tmp_col++;
+                if(tmp_col == col) {
+                    Y_position_start_vertical +=40;
+                    Y_position_finish_vertical +=40;
+                    X_position_start_vertical = 30;
+                    X_position_finish_vertical = 30;
+                    tmp_col = 0;
+                    mode = 0;
+                }
 
+            }
         }
-
-
     }
 }
