@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07c49be5-5bb5-45fa-be32-0c7bd07a38bb" name="Changes" comment="Alert error">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/files/kamil1" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/files/kamil1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Generator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +43,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="29Nc9qPd1NVql7Lffb1HoZXjgM4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />

@@ -11,11 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.shape.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloController {
     @FXML
@@ -52,7 +54,7 @@ public class HelloController {
     public int row,col;
     public double to,from;
     private Generator generator;
-
+    private BFS check_graph;
     public void confirm(ActionEvent event) throws IOException {
         try {
             row = Integer.parseInt(row_field.getText());
@@ -93,7 +95,12 @@ public class HelloController {
         generator = new Generator(row,col,to,from);
         generator.generate();
         generator.write();
-        display_Graph();
+        ArrayList<Graph> arr = generator.getPrzejscia();
+        check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());
+        boolean bfs = check_graph.solver();
+        if(!bfs)
+            errors("Graph isn't consistent!");
+        display_Graph(arr);
 
     }
     public void Clear_Screen(ActionEvent event) {
@@ -111,6 +118,14 @@ public class HelloController {
             String read_path = read_text.getText();
             Reader read_class = new Reader(read_path);
             read_class.scanFile();
+            row = read_class.getReadedRow();
+            col = read_class.getReadedColumn();
+            ArrayList<Graph> arr = read_class.getReadedLines();
+            check_graph = new BFS(arr,read_class.getReadedRow(), read_class.getReadedColumn());
+            boolean bfs = check_graph.solver();
+            if(!bfs)
+                errors("Graph isn't consistent!");
+            display_Graph(arr);
         }
         catch(IOException e) {
             errors("Can't read from file,invalid path or file doesn't exist!");
@@ -128,7 +143,7 @@ public class HelloController {
         }
 
     }
-    public void display_Graph() {
+    public void display_Graph(ArrayList<Graph> arr) {
         int X_position = 20;
         int Y_position = 235;
         int tmp_col = 0;
@@ -147,9 +162,9 @@ public class HelloController {
                 tmp_col = 0;
             }
         }
-        display_line_between_graph();
+        display_line_between_graph(arr);
     }
-    public void display_line_between_graph() {
+    public void display_line_between_graph(ArrayList<Graph> arr) {
         int X_position_start_across = 38;
         int X_position_finish_across = 60;
         int Y_position_start_across = 247;
@@ -158,17 +173,20 @@ public class HelloController {
         int X_position_finish_vertical = 30;
         int Y_position_start_vertical = 259;
         int Y_position_finish_vertical = 276;
+        int i = 0;
         int tmp_col = 0;
-        int mode = 0;
+        int tmp_row = 0;
         int line_number = col*(row-1) + row*(col-1);
         lines = new Line[line_number];
-        for(int i=0; i<line_number; i++) {
-            if(mode == 0) {
+        arr = generator.getPrzejscia();
+        for(Graph object : arr) {
+            if(object.getIndex1()  + 1  == object.getIndex2()) {
                 lines[i] = new Line();
                 lines[i].setStartX(X_position_start_across);
                 lines[i].setStartY(Y_position_start_across);
                 lines[i].setEndX(X_position_finish_across);
                 lines[i].setEndY(Y_position_finish_across);
+                lines[i] = choose_color(lines[i], object.getValue());
                 stage.getChildren().add(lines[i]);
                 X_position_start_across += 40;
                 X_position_finish_across += 40;
@@ -179,29 +197,45 @@ public class HelloController {
                     X_position_start_across = 38;
                     X_position_finish_across = 60;
                     tmp_col = 0;
-                    mode = 1;
                 }
             }
-            else if(mode == 1){
+            else {
                 lines[i] = new Line();
                 lines[i].setStartX(X_position_start_vertical);
                 lines[i].setStartY(Y_position_start_vertical);
                 lines[i].setEndX(X_position_finish_vertical);
                 lines[i].setEndY(Y_position_finish_vertical);
+                lines[i] = choose_color(lines[i],object.getValue());
                 stage.getChildren().add(lines[i]);
                 X_position_start_vertical += 40;
                 X_position_finish_vertical += 40;
-                tmp_col++;
-                if(tmp_col == col) {
+                tmp_row++;
+                if(tmp_row == col) {
                     Y_position_start_vertical +=40;
                     Y_position_finish_vertical +=40;
                     X_position_start_vertical = 30;
                     X_position_finish_vertical = 30;
-                    tmp_col = 0;
-                    mode = 0;
+                    tmp_row = 0;
                 }
-
             }
+            i++;
         }
     }
+    private Line choose_color(Line line, double value) {
+        double divisor = (from - to)/7;
+        if(value >= to && value < to+divisor)
+            line.setStroke(Color.DARKBLUE);
+        else if(value >= to+divisor && value < to+2*divisor)
+            line.setStroke(Color.LIGHTBLUE);
+        else if(value >= to+2*divisor && value < to+3*divisor)
+            line.setStroke(Color.GREEN);
+        else if(value >= to+3*divisor && value < to+4*divisor)
+            line.setStroke(Color.YELLOW);
+        else if(value >= to+4*divisor && value < to+5*divisor)
+            line.setStroke(Color.ORANGE);
+        else if(value >= to+5*divisor && value <= from)
+            line.setStroke(Color.RED);
+        return line;
+    }
+
 }
