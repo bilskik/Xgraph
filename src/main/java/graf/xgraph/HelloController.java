@@ -171,7 +171,7 @@ public class HelloController {
                 click++;
                 if(start != -1 && finish != -1) {
                     PrewAndValue[] solved;
-                    Dijkstra d = new Dijkstra(arr,row*col,start,col);
+                    Dijkstra d = new Dijkstra(arr,row*col,start,finish);
                     solved = d.solve();
                     System.out.println(solved[0].getValue());
                 }
