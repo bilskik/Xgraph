@@ -1,7 +1,7 @@
 package graf.xgraph;
 
 public class PrewAndValue {
-    int previous;
+     private int previous;
 
     public double getValue() {
         return value;
@@ -11,7 +11,7 @@ public class PrewAndValue {
         this.value = value;
     }
 
-    double value;
+    private double value;
 
     public int getPrevious() {
         return previous;

@@ -55,6 +55,7 @@ public class HelloController {
     public double to,from;
     private Generator generator;
     private BFS check_graph;
+    int mode = 0;
     public void confirm(ActionEvent event) throws IOException {
         try {
             row = Integer.parseInt(row_field.getText());
@@ -85,15 +86,20 @@ public class HelloController {
     }
     public void graph(ActionEvent event) {
         String tmp = "Consistent";
+        mode = 0;
         System.out.println(graph_cons.getText());
-        if(graph_cons.getText().equals(tmp))
+        if(graph_cons.getText().equals(tmp)) {
             graph_cons.setText("Inconsistent");
-        else
+            mode = 1;
+        }
+        else {
             graph_cons.setText("Consistent");
+            mode = 0;
+        }
     }
     public void Generate_Graph(ActionEvent event) {
         generator = new Generator(row,col,to,from);
-        generator.generate();
+        generator.generate(mode);
         generator.write();
         ArrayList<Graph> arr = generator.getPrzejscia();
         check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());

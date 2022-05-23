@@ -17,12 +17,17 @@ public class Generator {
     private ArrayList<Graph> przejscia = new ArrayList<Graph>();
     Random random = new Random();
 
-    public void generate() {
+    public void generate(int mode) {
         for (int i = 0; i < columnNumber * rowNumber - 1; i++) {
             if (((i + 1) % columnNumber != 0) && (i < columnNumber * (rowNumber - 1))) {
-                przejscia.add(new Graph(i, i + 1, rand_generator()));
-                przejscia.add(new Graph(i, i + columnNumber, rand_generator()));
-                //generuj 2 prawo i dĂłl
+                if(mode == 0) {
+                    przejscia.add(new Graph(i, i + 1, rand_generator()));
+                    przejscia.add(new Graph(i, i + columnNumber, rand_generator()));
+                }//generuj 2 prawo i dĂłl
+                if(mode == 1){
+                    przejscia.add(new Graph(i, i + 1, 0.0));
+                    przejscia.add(new Graph(i, i + columnNumber, 0.0));
+                }
             }
             if ((i + 1) % columnNumber == 0) {
                 przejscia.add(new Graph(i, i + columnNumber, rand_generator()));
@@ -60,7 +65,7 @@ public class Generator {
         }
     }
     public ArrayList<Graph> getPrzejscia() {
-        return(przejscia);
+        return przejscia ;
     }
     public int getRowNumber() {
         return rowNumber;
