@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Dijkstra {
     private int index;
-    private PrewAndValue[] solved;
+    public PrewAndValue[] solved;
     private boolean [] visited;
     private final ArrayList<Graph> data;
     private final int start;
@@ -70,4 +70,5 @@ public class Dijkstra {
         }
         System.out.println(i);
     }
+
 }
