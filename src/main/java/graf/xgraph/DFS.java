@@ -21,7 +21,6 @@ public class DFS {
         for (boolean b : visited) {
             b = false;
         }
-
         for (Graph object : data) {
             visited [current] = true;
             if (object.getIndex1() == current && visited[object.getIndex2()] == false)
@@ -29,6 +28,11 @@ public class DFS {
             else if (object.getIndex2() == current && visited[object.getIndex1()] == false)
                 stack.push(object.getIndex1());
             current = stack.pop();
+        }
+        visited[current] = true;
+        while(!stack.isEmpty()){
+            current = stack.pop();
+            visited[current] = true;
         }
         for (boolean bool :visited) {
             if(bool == false)
