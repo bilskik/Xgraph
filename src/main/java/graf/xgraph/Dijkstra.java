@@ -12,7 +12,10 @@ public class Dijkstra {
 
     public Dijkstra(ArrayList data, int index, int start, int finish) {
         this.index = index;
+        solved = new PrewAndValue[index];
+        visited = new boolean[index];
         for (int i = 0; i < index; i++) {
+            solved[i] = new PrewAndValue();
             solved[i].setPrevious(-1);
             solved[i].setValue(Double.MAX_VALUE);
             visited[i] = false;
@@ -65,9 +68,11 @@ public class Dijkstra {
     public void printPath(){
         int i = finish;
         while(i != start){
-            System.out.println(i + "value: " + solved[i].getValue() + " -> ");
+            System.out.print(i + " -> ");
             i = solved[i].getPrevious();
         }
         System.out.println(i);
+        System.out.println(solved[finish].getValue());
     }
+
 }

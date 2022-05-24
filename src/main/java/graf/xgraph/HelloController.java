@@ -50,6 +50,9 @@ public class HelloController {
     private AnchorPane stage;
     Button buttons[];
     Line lines[];
+    int start = -1;
+    int finish = -1;
+    int click;
 
     public int row,col;
     public double to,from;
@@ -87,7 +90,6 @@ public class HelloController {
     public void graph(ActionEvent event) {
         String tmp = "Consistent";
         mode = 0;
-        System.out.println(graph_cons.getText());
         if(graph_cons.getText().equals(tmp)) {
             graph_cons.setText("Inconsistent");
             mode = 1;
@@ -115,9 +117,10 @@ public class HelloController {
                 stage.getChildren().remove(buttons[i]);
             stage.getChildren().remove(lines[i]);
         }
+        click = 0;
     }
     public void Clear_Path(ActionEvent event) {
-        ;
+        click = 0;
     }
     public void Read_From_File(ActionEvent event) throws IOException {
         try {
@@ -154,12 +157,25 @@ public class HelloController {
         int Y_position = 235;
         int tmp_col = 0;
         buttons = new Button[row*col];
-        for(int i=0; i<row*col; i++)
-            buttons[i] =  new Button();
         for(int i=0; i<row*col; i++) {
+            final int buttonId = i;
+            buttons[i] =  new Button();
             buttons[i].setLayoutX(X_position);
             buttons[i].setLayoutY(Y_position);
             stage.getChildren().add(buttons[i]);
+            buttons[i].setOnAction(e -> {
+                if(click == 0)
+                    start = buttonId;
+                else
+                    finish = buttonId;
+                click++;
+                if(start != -1 && finish != -1) {
+                    PrewAndValue[] solved;
+                    Dijkstra d = new Dijkstra(arr,row*col,start,finish);
+                    solved = d.solve();
+                    System.out.println(solved[0].getValue());
+                }
+            });
             X_position+=40;
             tmp_col++;
             if(tmp_col == col) {
