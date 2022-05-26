@@ -9,16 +9,17 @@ public class DFS {
     private ArrayList<Graph> data;
     private final int  start;
     private final int indexNumber;
-    private ArrayList<ArrayList<Integer>> vertex = new ArrayList<>();
+    private ArrayList<Integer> [] vertex;
     public DFS(ArrayList<Graph> data, int start, int indexNumber) {
         this.data = data;
         this.start = start;
         this.indexNumber = indexNumber;
+        vertex = new ArrayList[indexNumber];
             for (Graph object: data) {
                 int src = object.getIndex1();
                 int dest = object.getIndex2();
-                vertex.get(src).add(dest);
-                vertex.get(dest).add(src);
+                vertex[src].add(dest);
+                vertex[dest].add(src);
             }
         }
     public boolean solve() {
@@ -32,7 +33,7 @@ public class DFS {
         visited[current] = true;
         while(!stack.isEmpty()){
         current = stack.pop();
-        for(Integer integer: vertex.get(current)){
+        for(Integer integer: vertex[current]){
             if(!visited[integer]){
                 stack.push(integer);
             }
