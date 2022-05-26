@@ -194,16 +194,6 @@ public class HelloController {
                     finish = buttonId;
                     click++;
                 }
-                System.out.println(start);
-                System.out.println(finish);
-                /*
-                if(start > finish && finish != -1 ) {
-                    int tmp = finish;
-                    finish = start;
-                    start = tmp;
-                }
-                */
-
                 if(start != -1 && finish != -1 && click == 2) {
                     click = 0;
                     int [] arr_index = new int[col*(row-1) + row*(col-1)];
@@ -225,7 +215,7 @@ public class HelloController {
         }
         display_line_between_graph();
     }
-    /*
+
     public void display_line_between_graph() {
         int X_position_start_across = 38;
         int X_position_finish_across = 60;
@@ -282,62 +272,6 @@ public class HelloController {
             i++;
         }
     }
-    */
-    public void display_line_between_graph() {
-        int tmp_col = 0;
-        int tmp_row = 0;
-        double change_position_about = 40;
-        int X_position_start_across = 38;
-        int X_position_finish_across = 60;
-        int Y_position_across = 247;
-        int X_position_vertical = 30;
-        int Y_position_start_vertical = 259;
-        int Y_position_finish_vertical = 276;
-
-        int i = 0;
-        int line_number = col*(row-1) + row*(col-1);
-        lines = new Line[line_number];
-        for(Graph object : arr) {
-            if(object.getIndex1()  + 1  == object.getIndex2()) {
-                lines[i] = new Line();
-                lines[i].setStartX(X_position_start_across);
-                lines[i].setStartY(Y_position_across);
-                lines[i].setEndX(X_position_finish_across);
-                lines[i].setEndY(Y_position_across);
-                lines[i] = choose_color(lines[i], object.getValue());
-                stage.getChildren().add(lines[i]);
-                X_position_start_across += 40;
-                X_position_finish_across += 40;
-                tmp_col++;
-                if (tmp_col + 1 == col) {
-                    Y_position_across += change_position_about;
-                    X_position_start_across = 38;
-                    X_position_finish_across = 60;
-                    tmp_col = 0;
-                }
-            }
-            else{
-                lines[i] = new Line();
-                lines[i].setStartX(X_position_vertical);
-                lines[i].setStartY(Y_position_start_vertical);
-                lines[i].setEndX(X_position_vertical);
-                lines[i].setEndY(Y_position_finish_vertical);
-                lines[i] = choose_color(lines[i],object.getValue());
-                stage.getChildren().add(lines[i]);
-                X_position_vertical += 40;
-                tmp_row++;
-                if(tmp_row == col) {
-                    Y_position_start_vertical +=change_position_about;
-                    Y_position_finish_vertical +=change_position_about;
-                    X_position_vertical = 30;
-                    tmp_row = 0;
-                }
-            }
-
-            i++;
-        }
-    }
-
     private Line choose_color(Line line, double value) {
         double divisor = (from - to)/7;
         if(value >= to && value < to+divisor)
