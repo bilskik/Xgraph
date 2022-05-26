@@ -2,8 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+
 
 <AnchorPane fx:id="stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#confirm" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graf.xgraph.HelloController">
    <children>
@@ -25,5 +27,8 @@
       <Button fx:id="save_but" layoutX="650.0" layoutY="139.0" mnemonicParsing="false" onAction="#Save_To_File" prefHeight="80.0" prefWidth="100.0" text="Save to file" />
       <TextField fx:id="read_text" layoutX="534.0" layoutY="139.0" prefHeight="80.0" prefWidth="100.0" />
       <TextField fx:id="save_text" layoutX="768.0" layoutY="139.0" prefHeight="80.0" prefWidth="100.0" />
+      <Label fx:id="labelpath" alignment="CENTER" contentDisplay="CENTER" layoutX="768.0" layoutY="20.0" prefHeight="50.0" prefWidth="100.0" text="Path value's" />
+      <Label fx:id="path_value" alignment="CENTER" contentDisplay="CENTER" layoutX="768.0" layoutY="75.0" prefHeight="50.0" prefWidth="100.0" />
+      <ScrollPane fx:id="scroll" layoutX="24.0" layoutY="236.0" prefHeight="517.0" prefWidth="948.0" />
    </children>
 </AnchorPane>

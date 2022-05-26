@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -49,18 +46,26 @@ public class HelloController {
     private TextField save_text;
     @FXML
     private AnchorPane stage;
-    Button buttons[];
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private Label path_value;
+
+    Button buttons[] = null;
     Line lines[];
     int start = -1;
     int finish = -1;
-    int click;
+    int tmp_finish = -1;
+    int click = 0;
     ArrayList<Graph> arr;
     public int row,col;
     public double to,from;
     private Generator generator;
     private BFS check_graph;
+    private DFS check_graph_dfs;
     int mode = 0;
     double value = 0;
+
     public void confirm(ActionEvent event) throws IOException {
         try {
             row = Integer.parseInt(row_field.getText());
@@ -102,11 +107,15 @@ public class HelloController {
         }
     }
     public void Generate_Graph(ActionEvent event) {
+        if(buttons != null) {
+            clear();
+        }
         generator = new Generator(row,col,to,from);
         generator.generate(mode);
         generator.write();
         arr = generator.getPrzejscia();
         check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());
+        //check_graph_dfs = new DFS(arr,generator.get)
         boolean bfs = check_graph.solver();
         if(!bfs)
             errors("Graph isn't consistent!");
@@ -114,14 +123,7 @@ public class HelloController {
 
     }
     public void Clear_Screen(ActionEvent event) {
-        for(int i=0; i<col*(row-1) + row*(col-1); i++) {
-            if(row*col > i)
-                stage.getChildren().remove(buttons[i]);
-            stage.getChildren().remove(lines[i]);
-        }
-        click = 0;
-        finish = -1;
-        start = -1;
+        clear();
     }
     public void Clear_Path(ActionEvent event) {
         click = 0;
@@ -135,7 +137,7 @@ public class HelloController {
             lines[iter] = choose_color(lines[iter],object.getValue());
             iter++;
         }
-
+        path_value.setText(null);
     }
     public void Read_From_File(ActionEvent event) throws IOException {
         try {
@@ -168,7 +170,9 @@ public class HelloController {
 
     }
     public void display_Graph() {
-
+        scroll = new ScrollPane();
+        int change_positon_x = 40;
+        int change_position_y = 40;
         int X_position = 20;
         int Y_position = 235;
         int tmp_col = 0;
@@ -176,40 +180,52 @@ public class HelloController {
         for(int i=0; i<row*col; i++) {
             final int buttonId = i;
             buttons[i] =  new Button();
+            buttons[i].setPrefSize(1,1);
             buttons[i].setLayoutX(X_position);
             buttons[i].setLayoutY(Y_position);
             stage.getChildren().add(buttons[i]);
             buttons[i].setOnAction(e -> {
 
-                if(click == 0)
+                if(click == 0) {
                     start = buttonId;
-                else
+                    click++;
+                }
+                else {
                     finish = buttonId;
-                click++;
-                if(start > finish && finish != -1 && start != -1) {
+                    click++;
+                }
+                System.out.println(start);
+                System.out.println(finish);
+                /*
+                if(start > finish && finish != -1 ) {
                     int tmp = finish;
                     finish = start;
                     start = tmp;
                 }
-                if(start != -1 && finish != -1) {
+                */
+
+                if(start != -1 && finish != -1 && click == 2) {
+                    click = 0;
                     int [] arr_index = new int[col*(row-1) + row*(col-1)];
                     PrewAndValue[] solved;
                     Dijkstra d = new Dijkstra(arr,row*col,start,finish);
                     solved = d.solve();
                     arr_index = reverse_element(arr_index,solved);
                     draw_path(arr_index);
+                    path_value.setText(Double.toString(value));
                 }
             });
-            X_position+=40;
+            X_position+=change_positon_x;
             tmp_col++;
             if(tmp_col == col) {
-                Y_position+=40;
+                Y_position+=change_position_y;
                 X_position=20;
                 tmp_col = 0;
             }
         }
         display_line_between_graph();
     }
+    /*
     public void display_line_between_graph() {
         int X_position_start_across = 38;
         int X_position_finish_across = 60;
@@ -266,6 +282,62 @@ public class HelloController {
             i++;
         }
     }
+    */
+    public void display_line_between_graph() {
+        int tmp_col = 0;
+        int tmp_row = 0;
+        double change_position_about = 40;
+        int X_position_start_across = 38;
+        int X_position_finish_across = 60;
+        int Y_position_across = 247;
+        int X_position_vertical = 30;
+        int Y_position_start_vertical = 259;
+        int Y_position_finish_vertical = 276;
+
+        int i = 0;
+        int line_number = col*(row-1) + row*(col-1);
+        lines = new Line[line_number];
+        for(Graph object : arr) {
+            if(object.getIndex1()  + 1  == object.getIndex2()) {
+                lines[i] = new Line();
+                lines[i].setStartX(X_position_start_across);
+                lines[i].setStartY(Y_position_across);
+                lines[i].setEndX(X_position_finish_across);
+                lines[i].setEndY(Y_position_across);
+                lines[i] = choose_color(lines[i], object.getValue());
+                stage.getChildren().add(lines[i]);
+                X_position_start_across += 40;
+                X_position_finish_across += 40;
+                tmp_col++;
+                if (tmp_col + 1 == col) {
+                    Y_position_across += change_position_about;
+                    X_position_start_across = 38;
+                    X_position_finish_across = 60;
+                    tmp_col = 0;
+                }
+            }
+            else{
+                lines[i] = new Line();
+                lines[i].setStartX(X_position_vertical);
+                lines[i].setStartY(Y_position_start_vertical);
+                lines[i].setEndX(X_position_vertical);
+                lines[i].setEndY(Y_position_finish_vertical);
+                lines[i] = choose_color(lines[i],object.getValue());
+                stage.getChildren().add(lines[i]);
+                X_position_vertical += 40;
+                tmp_row++;
+                if(tmp_row == col) {
+                    Y_position_start_vertical +=change_position_about;
+                    Y_position_finish_vertical +=change_position_about;
+                    X_position_vertical = 30;
+                    tmp_row = 0;
+                }
+            }
+
+            i++;
+        }
+    }
+
     private Line choose_color(Line line, double value) {
         double divisor = (from - to)/7;
         if(value >= to && value < to+divisor)
@@ -298,7 +370,7 @@ public class HelloController {
             arr_index[a] = arr_index[arr_index.length - a - 1];
             arr_index[arr_index.length - a - 1] = tmp;
         }
-        value = solved[finish].getValue();
+        value = Math.round(solved[finish].getValue());
         return arr_index;
     }
     private void draw_path(int [] path) {
@@ -309,7 +381,7 @@ public class HelloController {
                 a = i;
                 if(path[i] == -1)
                     continue;
-                else if(object.getIndex1() == path[i-1] && object.getIndex2() == path[i]) {
+                else if(object.getIndex1() == path[i-1] && object.getIndex2() == path[i] || object.getIndex2() == path[i-1] && object.getIndex1() == path[i]) {
                     lines[iter].setStroke(Color.BLACK);
                     buttons[path[i-1]].setStyle("-fx-background-color: #000000; ");
                 }
@@ -318,6 +390,16 @@ public class HelloController {
             iter++;
         }
         buttons[finish].setStyle("-fx-background-color: #000000; ");
-    }
 
+    }
+    private void clear() {
+        for(int i=0; i< lines.length; i++)
+            stage.getChildren().remove(lines[i]);
+        for(int i=0; i< buttons.length; i++)
+            stage.getChildren().remove(buttons[i]);
+        path_value.setText(null);
+        click = 0;
+        finish = -1;
+        start = -1;
+    }
 }
