@@ -18,6 +18,7 @@ import javafx.scene.shape.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HelloController {
     @FXML
@@ -53,12 +54,13 @@ public class HelloController {
     int start = -1;
     int finish = -1;
     int click;
-
+    ArrayList<Graph> arr;
     public int row,col;
     public double to,from;
     private Generator generator;
     private BFS check_graph;
     int mode = 0;
+    double value = 0;
     public void confirm(ActionEvent event) throws IOException {
         try {
             row = Integer.parseInt(row_field.getText());
@@ -103,12 +105,12 @@ public class HelloController {
         generator = new Generator(row,col,to,from);
         generator.generate(mode);
         generator.write();
-        ArrayList<Graph> arr = generator.getPrzejscia();
+        arr = generator.getPrzejscia();
         check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());
         boolean bfs = check_graph.solver();
         if(!bfs)
             errors("Graph isn't consistent!");
-        display_Graph(arr);
+        display_Graph();
 
     }
     public void Clear_Screen(ActionEvent event) {
@@ -118,9 +120,22 @@ public class HelloController {
             stage.getChildren().remove(lines[i]);
         }
         click = 0;
+        finish = -1;
+        start = -1;
     }
     public void Clear_Path(ActionEvent event) {
         click = 0;
+        start = -1;
+        finish = -1;
+        int iter = 0;
+        for(int i=0; i< buttons.length; i++) {
+            buttons[i].setStyle(null);
+        }
+        for(Graph object : arr) {
+            lines[iter] = choose_color(lines[iter],object.getValue());
+            iter++;
+        }
+
     }
     public void Read_From_File(ActionEvent event) throws IOException {
         try {
@@ -129,12 +144,12 @@ public class HelloController {
             read_class.scanFile();
             row = read_class.getReadedRow();
             col = read_class.getReadedColumn();
-            ArrayList<Graph> arr = read_class.getReadedLines();
+            arr = read_class.getReadedLines();
             check_graph = new BFS(arr,read_class.getReadedRow(), read_class.getReadedColumn());
             boolean bfs = check_graph.solver();
             if(!bfs)
                 errors("Graph isn't consistent!");
-            display_Graph(arr);
+            display_Graph();
         }
         catch(IOException e) {
             errors("Can't read from file,invalid path or file doesn't exist!");
@@ -152,7 +167,8 @@ public class HelloController {
         }
 
     }
-    public void display_Graph(ArrayList<Graph> arr) {
+    public void display_Graph() {
+
         int X_position = 20;
         int Y_position = 235;
         int tmp_col = 0;
@@ -164,16 +180,24 @@ public class HelloController {
             buttons[i].setLayoutY(Y_position);
             stage.getChildren().add(buttons[i]);
             buttons[i].setOnAction(e -> {
+
                 if(click == 0)
                     start = buttonId;
                 else
                     finish = buttonId;
                 click++;
+                if(start > finish && finish != -1 && start != -1) {
+                    int tmp = finish;
+                    finish = start;
+                    start = tmp;
+                }
                 if(start != -1 && finish != -1) {
+                    int [] arr_index = new int[col*(row-1) + row*(col-1)];
                     PrewAndValue[] solved;
                     Dijkstra d = new Dijkstra(arr,row*col,start,finish);
                     solved = d.solve();
-                    System.out.println(solved[0].getValue());
+                    arr_index = reverse_element(arr_index,solved);
+                    draw_path(arr_index);
                 }
             });
             X_position+=40;
@@ -184,9 +208,9 @@ public class HelloController {
                 tmp_col = 0;
             }
         }
-        display_line_between_graph(arr);
+        display_line_between_graph();
     }
-    public void display_line_between_graph(ArrayList<Graph> arr) {
+    public void display_line_between_graph() {
         int X_position_start_across = 38;
         int X_position_finish_across = 60;
         int Y_position_start_across = 247;
@@ -200,7 +224,6 @@ public class HelloController {
         int tmp_row = 0;
         int line_number = col*(row-1) + row*(col-1);
         lines = new Line[line_number];
-        arr = generator.getPrzejscia();
         for(Graph object : arr) {
             if(object.getIndex1()  + 1  == object.getIndex2()) {
                 lines[i] = new Line();
@@ -258,6 +281,43 @@ public class HelloController {
         else if(value >= to+5*divisor && value <= from)
             line.setStroke(Color.RED);
         return line;
+    }
+    private int[] reverse_element(int [] arr_index, PrewAndValue[] solved) {
+        Arrays.fill(arr_index,-1);
+        int iter = 0;
+        int tmp;
+        int i = finish;
+        arr_index[iter++] = finish;
+        while(i != start){
+            i = solved[i].getPrevious();
+            arr_index[iter] = i;
+            iter++;
+        }
+        for (int a = 0; a < arr_index.length / 2; a++) {
+            tmp = arr_index[a];
+            arr_index[a] = arr_index[arr_index.length - a - 1];
+            arr_index[arr_index.length - a - 1] = tmp;
+        }
+        value = solved[finish].getValue();
+        return arr_index;
+    }
+    private void draw_path(int [] path) {
+        int a;
+        int iter=0;
+        for(Graph object : arr) {
+            for(int i=0; i< path.length; i++) {
+                a = i;
+                if(path[i] == -1)
+                    continue;
+                else if(object.getIndex1() == path[i-1] && object.getIndex2() == path[i]) {
+                    lines[iter].setStroke(Color.BLACK);
+                    buttons[path[i-1]].setStyle("-fx-background-color: #000000; ");
+                }
+
+            }
+            iter++;
+        }
+        buttons[finish].setStyle("-fx-background-color: #000000; ");
     }
 
 }
