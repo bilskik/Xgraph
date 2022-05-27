@@ -116,11 +116,13 @@ public class HelloController {
         generator.write();
         arr = generator.getPrzejscia();
         check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());
-        //check_graph_dfs = new DFS(arr,0,row*col);
-        //boolean dfs = check_graph_dfs.solve();
+
+        check_graph_dfs = new DFS(arr,0, row*col);
         boolean bfs = check_graph.solver();
-       // System.out.println(dfs);
-        if(!bfs)
+      //  if(!bfs)
+         //   errors("Graph isn't consistent!");
+        boolean dfs = check_graph_dfs.solve();
+        if(!dfs)
             errors("Graph isn't consistent!");
         display_Graph();
 

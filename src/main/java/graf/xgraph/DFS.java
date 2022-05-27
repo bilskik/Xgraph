@@ -9,18 +9,23 @@ public class DFS {
     private ArrayList<Graph> data;
     private final int  start;
     private final int indexNumber;
-    private ArrayList<ArrayList<Integer>> vertex = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> vertex;
     public DFS(ArrayList<Graph> data, int start, int indexNumber) {
         this.data = data;
         this.start = start;
         this.indexNumber = indexNumber;
-            for (Graph object: data) {
-                int src = object.getIndex1();
-                int dest = object.getIndex2();
-                vertex.get(src).add(dest);
-                vertex.get(dest).add(src);
+        vertex = new ArrayList<>();
+        for (int i = 0; i < indexNumber; i++) {
+            ArrayList<Integer> integers = new ArrayList<>();
+            for (Graph object : data) {
+                if(object.getIndex1() == i && object.getValue() != 0.0)
+                    integers.add(object.getIndex2());
+                if(object.getIndex2() == i && object.getValue() != 0.0)
+                    integers.add(object.getIndex1());
             }
+            vertex.add(integers);
         }
+    }
     public boolean solve() {
         Stack<Integer> stack = new Stack<Integer>();
         int current = start;
