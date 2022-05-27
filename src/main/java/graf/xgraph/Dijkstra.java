@@ -25,7 +25,7 @@ public class Dijkstra {
         this.finish = finish;
     }
 
-    public PrewAndValue[] solve() {
+    public PrewAndValue[] solve() {             //main djikstra function
         solved[start].setValue(0.0);
 
         while(!check()) {

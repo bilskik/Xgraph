@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="07c49be5-5bb5-45fa-be32-0c7bd07a38bb" name="Changes" comment="Alert error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Dijkstra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/HelloController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/graf/xgraph/GUi.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/graf/xgraph/GUi.fxml" afterDir="false" />
     </list>
@@ -19,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -51,6 +55,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="graf.xgraph" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="graf.xgraph.Main" />
@@ -65,26 +84,82 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="xgraph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="graf.xgraph" />
+    <configuration name="DFSTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Xgraph" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="graf.xgraph.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="graf.xgraph" />
+      <option name="MAIN_CLASS_NAME" value="graf.xgraph.DFSTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DFSTest.dfs_test_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Xgraph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graf.xgraph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graf.xgraph" />
+      <option name="MAIN_CLASS_NAME" value="graf.xgraph.DFSTest" />
+      <option name="METHOD_NAME" value="dfs_test_1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DijkstraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Xgraph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graf.xgraph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graf.xgraph" />
+      <option name="MAIN_CLASS_NAME" value="graf.xgraph.DijkstraTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DijkstraTest.djikstra_test_2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Xgraph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graf.xgraph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graf.xgraph" />
+      <option name="MAIN_CLASS_NAME" value="graf.xgraph.DijkstraTest" />
+      <option name="METHOD_NAME" value="djikstra_test_2" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.xgraph" />
+      <item itemvalue="JUnit.DFSTest" />
+      <item itemvalue="JUnit.DFSTest.dfs_test_1" />
+      <item itemvalue="JUnit.DijkstraTest" />
+      <item itemvalue="JUnit.DijkstraTest.djikstra_test_2" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.xgraph" />
+        <item itemvalue="JUnit.DijkstraTest.djikstra_test_2" />
+        <item itemvalue="JUnit.DijkstraTest" />
+        <item itemvalue="JUnit.DFSTest" />
+        <item itemvalue="JUnit.DFSTest.dfs_test_1" />
       </list>
     </recent_temporary>
   </component>
