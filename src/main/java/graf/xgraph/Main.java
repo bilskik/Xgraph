@@ -14,8 +14,7 @@ import java.util.Objects;
 
 public class Main extends Application {
 
-    @FXML
-    private AnchorPane stage;
+
     @Override
     public void start(Stage stage) throws IOException {
         try {
