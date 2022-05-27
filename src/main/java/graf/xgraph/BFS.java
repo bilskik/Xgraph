@@ -12,7 +12,7 @@ public class BFS {
         this.row = rowNumber;
         this.col = colNumber;
     }
-    public boolean solver() {
+    public boolean solver() {           //main bfs solver
         int vertices[] =  new int[row*col];
         boolean visited[] = new boolean[row*col];
         int v;

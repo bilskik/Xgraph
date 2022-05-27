@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class HelloController {
+public class Controller {
     @FXML
     private TextField row_field;
     @FXML
@@ -67,7 +67,7 @@ public class HelloController {
     private DFS check_graph_dfs;
     int mode = 0;
     double value = 0;
-    public void confirm(ActionEvent event) throws IOException {
+    public void confirm(ActionEvent event) throws IOException {  //confirm button
         try {
             row = Integer.parseInt(row_field.getText());
             col = Integer.parseInt(col_field.getText());
@@ -89,13 +89,13 @@ public class HelloController {
             errors("Only numbers are allowed!");
         }
     }
-    private void errors(String output) {
+    private void errors(String output) {            //errors alert
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setHeaderText("Input not valid");
         errorAlert.setContentText(output);
         errorAlert.showAndWait();
     }
-    public void graph(ActionEvent event) {
+    public void graph(ActionEvent event) {          //choosing mode of graph generating(consistent or inconsistent)
         String tmp = "Consistent";
         mode = 0;
         if(graph_cons.getText().equals(tmp)) {
@@ -107,7 +107,7 @@ public class HelloController {
             mode = 0;
         }
     }
-    public void Generate_Graph(ActionEvent event) {
+    public void Generate_Graph(ActionEvent event) {         //generating graph
         if(buttons != null) {
             clear();
         }
@@ -119,18 +119,18 @@ public class HelloController {
 
         check_graph_dfs = new DFS(arr,0, row*col);
         boolean bfs = check_graph.solver();
-      //  if(!bfs)
-         //   errors("Graph isn't consistent!");
+        //  if(!bfs)
+        //   errors("Graph isn't consistent!");
         boolean dfs = check_graph_dfs.solve();
         if(!dfs)
             errors("Graph isn't consistent!");
         display_Graph();
 
     }
-    public void Clear_Screen(ActionEvent event) {
+    public void Clear_Screen(ActionEvent event) {           //clearing screen
         clear();
     }
-    public void Clear_Path(ActionEvent event) {
+    public void Clear_Path(ActionEvent event) {             //clearing path
         click = 0;
         start = -1;
         finish = -1;
@@ -144,7 +144,7 @@ public class HelloController {
         }
         path_value.setText(null);
     }
-    public void Read_From_File(ActionEvent event) throws IOException {
+    public void Read_From_File(ActionEvent event) throws IOException {      //reading from file
         try {
             String read_path = read_text.getText();
             Reader read_class = new Reader(read_path);
@@ -162,7 +162,7 @@ public class HelloController {
             errors("Can't read from file,invalid path or file doesn't exist!");
         }
     }
-    public void Save_To_File(ActionEvent event) {
+    public void Save_To_File(ActionEvent event) {               //saving to file
         try {
             String save_path = save_text.getText();
             generator.toFile(save_path);
@@ -174,7 +174,7 @@ public class HelloController {
         }
 
     }
-    public void display_Graph() {
+    public void display_Graph() {               //displaying graph
         int change_positon_x = 40;
         int change_position_y = 40;
         int X_position = 20;
@@ -220,7 +220,7 @@ public class HelloController {
         display_line_between_graph();
     }
 
-    public void display_line_between_graph() {
+    public void display_line_between_graph() {              //displaying lines
         int X_position_start_across = 38;
         int X_position_finish_across = 60;
         int Y_position_start_across = 247;
@@ -276,7 +276,7 @@ public class HelloController {
             i++;
         }
     }
-    private Line choose_color(Line line, double value) {
+    private Line choose_color(Line line, double value) {            //choosing line color
         double divisor = (from - to)/7;
         if(value >= to && value < to+divisor)
             line.setStroke(Color.DARKBLUE);
@@ -292,7 +292,7 @@ public class HelloController {
             line.setStroke(Color.RED);
         return line;
     }
-    private int[] reverse_element(int [] arr_index, PrewAndValue[] solved) {
+    private int[] reverse_element(int [] arr_index, PrewAndValue[] solved) {        //method helping drawing path
         Arrays.fill(arr_index,-1);
         int iter = 0;
         int tmp;
@@ -311,7 +311,7 @@ public class HelloController {
         value = Math.round(solved[finish].getValue());
         return arr_index;
     }
-    private void draw_path(int [] path) {
+    private void draw_path(int [] path) {           //drawing path
         int a;
         int iter=0;
         for(Graph object : arr) {
@@ -330,7 +330,7 @@ public class HelloController {
         buttons[finish].setStyle("-fx-background-color: #000000; ");
 
     }
-    private void clear() {
+    private void clear() {                  //clearing screen
         for(int i=0; i< lines.length; i++)
             stage.getChildren().remove(lines[i]);
         for(int i=0; i< buttons.length; i++)
