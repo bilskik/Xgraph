@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -45,11 +46,12 @@ public class HelloController {
     @FXML
     private TextField save_text;
     @FXML
-    private AnchorPane stage;
+    public AnchorPane stage;
     @FXML
-    private ScrollPane scroll;
+    public ScrollPane scroll;
     @FXML
     private Label path_value;
+
 
     Button buttons[] = null;
     Line lines[];
@@ -65,7 +67,6 @@ public class HelloController {
     private DFS check_graph_dfs;
     int mode = 0;
     double value = 0;
-
     public void confirm(ActionEvent event) throws IOException {
         try {
             row = Integer.parseInt(row_field.getText());
@@ -115,6 +116,7 @@ public class HelloController {
         generator.write();
         arr = generator.getPrzejscia();
         check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());
+
         check_graph_dfs = new DFS(arr,0, row*col);
         boolean bfs = check_graph.solver();
       //  if(!bfs)
@@ -173,7 +175,6 @@ public class HelloController {
 
     }
     public void display_Graph() {
-        scroll = new ScrollPane();
         int change_positon_x = 40;
         int change_position_y = 40;
         int X_position = 20;
