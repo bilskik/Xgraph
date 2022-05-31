@@ -53,7 +53,6 @@ public class Dijkstra {
             visited[j] = true;
 
         }
-        printPath();
         return solved;
     }
 
@@ -65,14 +64,6 @@ public class Dijkstra {
         return true;
     }
 
-    public void printPath(){
-        int i = finish;
-        while(i != start){
-            System.out.print(i + " -> ");
-            i = solved[i].getPrevious();
-        }
-        System.out.println(i);
-        System.out.println(solved[finish].getValue());
-    }
+
 
 }

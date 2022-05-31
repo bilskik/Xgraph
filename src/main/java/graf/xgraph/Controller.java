@@ -113,16 +113,12 @@ public class Controller {
         }
         generator = new Generator(row,col,to,from);
         generator.generate(mode);
-        generator.write();
         arr = generator.getPrzejscia();
         check_graph = new BFS(arr,generator.getRowNumber(), generator.getColumnNumber());
-
         check_graph_dfs = new DFS(arr,0, row*col);
         boolean bfs = check_graph.solver();
-        //  if(!bfs)
-        //   errors("Graph isn't consistent!");
         boolean dfs = check_graph_dfs.solve();
-        if(!dfs)
+        if(!bfs || !dfs)
             errors("Graph isn't consistent!");
         display_Graph();
 
@@ -154,7 +150,9 @@ public class Controller {
             arr = read_class.getReadedLines();
             check_graph = new BFS(arr,read_class.getReadedRow(), read_class.getReadedColumn());
             boolean bfs = check_graph.solver();
-            if(!bfs)
+            check_graph_dfs = new DFS(arr,0, row*col);
+            boolean dfs = check_graph_dfs.solve();
+            if(!bfs || !dfs)
                 errors("Graph isn't consistent!");
             display_Graph();
         }

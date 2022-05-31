@@ -29,22 +29,18 @@ public class Reader {
         sc = new Scanner(new java.io.File(pathName), StandardCharsets.UTF_8);
     }
 
-    public void scanFile () {
-        System.out.println("Row & Column");
+    public void scanFile () {                   //method managing reading from file
         if (sc.hasNextLine()){
             scanFirstLine(sc.nextLine());
         }
-        System.out.println("Array");
         int currentLine = 0;
         while (sc.hasNextLine()) {
-            // System.out.println(sc.nextLine());
             scanNextLine(sc.nextLine(), currentLine);
             currentLine++;
         }
-        System.out.println(readedRow + " " + readedColumn);
     }
 
-    public void scanFirstLine(String s) {
+    public void scanFirstLine(String s) {               //scanning first line in file
         Pattern pattern1 = Pattern.compile("(\\d+)\\s+(\\d+)");
         Matcher matcher1 = pattern1.matcher(s);
         if (!matcher1.matches()) {
@@ -57,12 +53,10 @@ public class Reader {
             first = Integer.parseInt(matcher1.group(1));
             second = Integer.parseInt(matcher1.group(2));
         }
-        System.out.println(first + " " + second);
-        System.out.println(first+second);
         readedRow = first;
         readedColumn = second;
     }
-    public void scanNextLine(String s,int line) {
+    public void scanNextLine(String s,int line) {                   //scanning next line in file
         Pattern pattern2 = Pattern.compile("(\\d+)\\s:\\s+(\\d+.\\d+)\\s");
         Pattern pattern3 = Pattern.compile("(\\d+)\\s:\\s+(\\d+.\\d+)\\s+(\\d+)\\s:\\s+(\\d+.\\d+)\\s");
         Matcher matcher2 = pattern2.matcher(s);
@@ -89,6 +83,5 @@ public class Reader {
             readedLines.add(new Graph(line, first,second));
             readedLines.add(new Graph(line, third,fourth));
         }
-        System.out.println(first + " " + second + " " + third + " " + fourth);
     }
 }

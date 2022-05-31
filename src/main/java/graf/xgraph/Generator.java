@@ -17,7 +17,7 @@ public class Generator {
     private ArrayList<Graph> przejscia = new ArrayList<Graph>();
     Random random = new Random();
 
-    public void generate(int mode) {
+    public void generate(int mode) {                //generating
         for (int i = 0; i < columnNumber * rowNumber - 1; i++) {
             if (((i + 1) % columnNumber != 0) && (i < columnNumber * (rowNumber - 1))) {
                 if(mode == 0) {
@@ -41,13 +41,9 @@ public class Generator {
     }
     private double rand_generator() {
         return from + (to - from)*random.nextDouble();
-    }
+    }   //seed to generate
 
-    public void write() {
-        for (Graph object : przejscia) {
-            System.out.println(object.getIndex1() + " <---> " + object.getIndex2() + " value: " + object.getValue());
-        }
-    }
+
     public void toFile(String path) throws IOException {
         File file = new File(path);
         file.toFile(rowNumber,columnNumber);

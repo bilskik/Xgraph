@@ -26,7 +26,7 @@ public class DFS {
             vertex.add(integers);
         }
     }
-    public boolean solve() {
+    public boolean solve() {            //main dfs function
         Stack<Integer> stack = new Stack<Integer>();
         int current = start;
         boolean[] visited = new boolean[indexNumber];
@@ -35,7 +35,7 @@ public class DFS {
         }
         stack.add(current);
         visited[current] = true;
-        while(!stack.isEmpty()){
+        while(!stack.isEmpty()){            //main loop
         current = stack.pop();
         for(Integer integer: vertex.get(current)){
             if(!visited[integer]){
