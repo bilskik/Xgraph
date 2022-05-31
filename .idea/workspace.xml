@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="07c49be5-5bb5-45fa-be32-0c7bd07a38bb" name="Changes" comment="Alert error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/DFS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Dijkstra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graf/xgraph/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graf/xgraph/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/graf/xgraph/GUi.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/graf/xgraph/GUi.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,13 +55,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
